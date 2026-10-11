@@ -1,0 +1,510 @@
+[
+  {
+    "slug": "dashcam",
+    "name": "Dashcam",
+    "plural": "Dashcams",
+    "for": ["car", "suv", "van", "pickup"],
+    "fitTime": "1 to 2 hours for a hardwired front and rear set",
+    "fittedAt": "Accessory shop or at your home",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "A camera that records the road so you have evidence after an accident or a dispute.",
+    "answer": "For a {vehicle}, choose a front and rear dashcam that stores power in a supercapacitor, and have it hardwired to the fuse box so it starts with the car and can record while parked. Budget for a high-endurance memory card and one to two hours of fitting.",
+    "checks": [
+      "Front and rear recording, not front only. Most disputes in traffic involve the back of the car.",
+      "Supercapacitor power storage. Cameras with a small lithium battery tend to fail in a car parked in the sun.",
+      "A high-endurance microSD card. Ordinary cards wear out quickly under constant recording.",
+      "A hardwire kit with low-voltage cut-off if you want parking mode, so the camera cannot drain the battery.",
+      "Clean cable routing behind the trim and away from airbags. Ask to see the fitter's previous work.",
+      "A warranty you can claim locally, with the seller's name on the receipt."
+    ],
+    "costDrivers": ["Resolution and brand", "Front only or front and rear", "Hardwire kit and parking mode", "Memory card size", "Fitting at the shop or at home"],
+    "notes": {
+      "ev": "An electric car still runs its accessories from a 12V system. The fitter should take power from a fuse tap on a switched 12V circuit and stay away from the high-voltage wiring. Ask your agent whether added wiring affects the warranty before you book.",
+      "hybrid": "On a hybrid, the 12V battery is small and sits idle more than in a petrol car, so a parking-mode camera needs a low-voltage cut-off set conservatively.",
+      "kei": "Kei cars have upright, compact windscreens. A small wedge-shaped camera behind the mirror keeps the driver's view clear.",
+      "reconditioned": "Many reconditioned Japanese imports arrive with a Japanese dashcam already fitted. Check whether it records, whether the menu language can be changed, and whether the card is still healthy before paying for a new one.",
+      "van": "For a van, ask for a longer rear cable and decide whether the rear camera goes inside the back glass or outside above the number plate.",
+      "pickup": "On a pickup, the rear camera usually has to be an external waterproof unit, because the cab's rear glass looks onto the load bed."
+    },
+    "faqs": [
+      {"q": "Is a dashcam legal in Sri Lanka?", "a": "Yes, recording the road from your own vehicle is common practice and footage is routinely shown to police and insurers after an accident. Mount the camera where it does not block the driver's view."},
+      {"q": "Will a dashcam drain the battery of my {vehicle}?", "a": "Not if it is wired correctly. A camera that only runs with the ignition draws nothing when parked. For parking mode, a hardwire kit with low-voltage cut-off switches the camera off before the battery gets low."},
+      {"q": "Can I fit a dashcam myself?", "a": "You can plug one into the 12V socket in a few minutes. A hardwired fit with hidden cables and a rear camera is worth paying a fitter for, because the cable has to pass airbags and trim clips safely."}
+    ]
+  },
+  {
+    "slug": "window-tint",
+    "name": "Window tint",
+    "plural": "Window tint",
+    "for": ["car", "suv", "van", "pickup"],
+    "fitTime": "2 to 4 hours, then a few days before winding the windows down",
+    "fittedAt": "Tint or accessory shop with a dust-controlled bay",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "Film applied to the glass to cut heat and glare and protect the interior.",
+    "answer": "For a {vehicle} in Sri Lanka's heat, a ceramic or other infrared-rejecting film does far more than a dark dyed film. Ask for the film's heat-rejection figures, check what darkness is currently road-legal, and get a written warranty against bubbling and fading.",
+    "checks": [
+      "Heat rejection, not darkness. A light ceramic film can block more heat than a very dark dyed film.",
+      "What is road-legal today. Rules on dark tint have been enforced unevenly over the years, so ask the fitter what currently passes.",
+      "The brand and series of film, written on the invoice. Rolls of unbranded film are common.",
+      "A clean, enclosed fitting bay. Dust under the film is permanent.",
+      "A warranty that covers bubbling, peeling and colour change, and who honours it.",
+      "Whether the windscreen is included. A clear heat-rejecting film on the windscreen makes the biggest difference to cabin heat."
+    ],
+    "costDrivers": ["Film type: dyed, carbon or ceramic", "Brand and warranty length", "Number of windows and whether the windscreen is included", "Removing old film first"],
+    "notes": {
+      "ev": "Heat-rejecting film matters more on an electric car, because the air conditioner draws from the same battery that moves the car. Less heat in the cabin means more range.",
+      "reconditioned": "Many reconditioned Japanese imports come with factory privacy glass at the rear. It reduces glare but not much heat, so a clear heat-rejecting film can still be worth adding over it.",
+      "kei": "Tall kei cars have a lot of glass for their size, so the cabin heats quickly. Prioritise the windscreen and front doors.",
+      "van": "Vans have large glass areas, so film cost is higher than for a car. Ask for a price by window, not a flat car rate.",
+      "pickup": "On a double-cab pickup, tint the rear cab glass as well. It faces the sun directly when the load bed is empty."
+    },
+    "faqs": [
+      {"q": "Which tint is best for the heat in Sri Lanka?", "a": "A ceramic or similar infrared-rejecting film. It blocks heat without needing to be very dark, so you keep visibility at night and stay on the right side of the rules."},
+      {"q": "How long does window tint last on a {vehicle}?", "a": "A quality ceramic film fitted well should last many years without fading. Cheap dyed film often turns purple and bubbles within two to three years in strong sun."},
+      {"q": "Can I wash the car straight after tinting?", "a": "You can wash the outside. Leave the windows closed and do not clean the inside of the glass for a few days, until the film has cured."}
+    ]
+  },
+  {
+    "slug": "ceramic-coating",
+    "name": "Ceramic coating",
+    "plural": "Ceramic coating",
+    "for": ["car", "suv", "van", "pickup"],
+    "fitTime": "1 to 3 days including paint preparation and curing",
+    "fittedAt": "Detailing studio",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "A hard, glossy protective layer bonded to the paint that makes the car easier to keep clean.",
+    "answer": "A ceramic coating on a {vehicle} is only as good as the paint preparation under it. Choose a detailer who washes, decontaminates and machine-polishes the paint first, names the product they use, and tells you how to maintain it. Expect the car to stay with them for one to three days.",
+    "checks": [
+      "Paint correction is included. Coating over swirl marks locks them in.",
+      "The product name and how many layers are applied, in writing.",
+      "A realistic durability claim. Years of protection depend on how the car is washed afterwards.",
+      "An indoor, dust-free bay with proper lighting.",
+      "What the warranty requires, such as paid maintenance washes.",
+      "Photos or cars you can inspect from previous jobs."
+    ],
+    "costDrivers": ["Size of the vehicle", "Condition of the paint and how much correction it needs", "Product grade and number of layers", "Extras such as glass, wheels and interior coating"],
+    "notes": {
+      "new": "A brand-new car still needs preparation. Transport film residue, yard dust and dealer wash marks should be removed before coating, but it needs less polishing than a used car, which keeps the cost down.",
+      "reconditioned": "Reconditioned imports have often been through auction yards and a sea voyage. Expect the detailer to recommend a full decontamination and at least one polishing stage.",
+      "pickup": "On a pickup, decide whether the load bed is included. Most owners coat the cab and body and use a separate liner for the bed.",
+      "van": "A van has much more painted area than a car. Get the price for your exact body length and roof height."
+    },
+    "faqs": [
+      {"q": "Is ceramic coating worth it in Sri Lanka?", "a": "It helps most if you park outdoors or near the coast, where sun, salt air and bird droppings mark paint quickly. It makes washing easier and keeps gloss longer. It does not stop stone chips or deep scratches."},
+      {"q": "How long does ceramic coating last on a {vehicle}?", "a": "Typically one to five years depending on the product and how the car is washed. Regular hand washing with a neutral shampoo keeps it working. Automatic brush washes shorten its life."},
+      {"q": "Ceramic coating or paint protection film?", "a": "Coating protects against chemical marks and makes cleaning easy. Paint protection film is a thicker layer that also absorbs stone chips and light scratches, at a much higher cost. Some owners film the front and coat the rest."}
+    ]
+  },
+  {
+    "slug": "seat-covers",
+    "name": "Seat covers",
+    "plural": "Seat covers",
+    "for": ["car", "suv", "van", "pickup", "three-wheeler"],
+    "fitTime": "1 to 3 hours for a tailored set",
+    "fittedAt": "Upholstery or accessory shop",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "Tailored covers that protect the original seats from sweat, spills and wear.",
+    "answer": "For a {vehicle}, have seat covers cut to the exact seat pattern instead of buying a universal set. Tailored covers sit tight, keep seat controls usable and, where the seats have side airbags, use seams designed to tear open. Fitting takes one to three hours.",
+    "checks": [
+      "A pattern made for your model and year, including headrests and armrests.",
+      "Airbag-compatible stitching if your front seats have side airbags. Ask the shop to show you the seam.",
+      "Material suited to the climate. Perforated or fabric-centred covers stay cooler than solid leatherette.",
+      "Stitching quality and foam backing. Look at a finished car before ordering.",
+      "Whether fitting is included and how long the set takes to make.",
+      "How the covers are cleaned and whether the colour is stable in sun."
+    ],
+    "costDrivers": ["Material: fabric, leatherette or leather", "Number of seat rows", "Custom stitching, colours and logos", "Made to order or ready stock"],
+    "notes": {
+      "three-wheeler": "For a three-wheeler, waterproof rexine is the practical choice. It wipes clean between hires and survives rain blowing in from the sides. Ask for double stitching on the driver's seat, which wears first.",
+      "kei": "Kei cars often have a front bench-style seat and fold-flat rear seats. Make sure the pattern keeps the folding and sliding functions working.",
+      "van": "For a van, count the rows before asking for a price. Covers for a full passenger van cost much more than for a car.",
+      "new": "On a brand-new car, check with the agent whether seat covers affect the airbag warranty, and keep the shop's confirmation that the covers are airbag-compatible.",
+      "pickup": "For a pickup used for work, choose a tough, wipe-clean material for the front seats at least."
+    },
+    "faqs": [
+      {"q": "Are seat covers safe with side airbags?", "a": "Only if they are made for it. Airbag-compatible covers have a weak seam on the side of the seat that tears open when the airbag fires. Universal covers without it can block the airbag."},
+      {"q": "Which seat cover material is best for hot weather?", "a": "Fabric or perforated leatherette. Solid leatherette looks smart and wipes clean but gets hot and sticky in a car parked in the sun."},
+      {"q": "How long do seat covers for a {vehicle} take to make?", "a": "Shops that hold the pattern can often fit a ready set the same day. A made-to-order set in your choice of colour usually takes a few days."}
+    ]
+  },
+  {
+    "slug": "floor-mats",
+    "name": "Floor mats",
+    "plural": "Floor mats",
+    "for": ["car", "suv", "van", "pickup"],
+    "fitTime": "No fitting needed for a model-specific set",
+    "fittedAt": "Delivered, or collected from an accessory shop",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "Moulded or tailored mats that keep mud, sand and water off the carpet.",
+    "answer": "For a {vehicle}, buy mats moulded for the exact model in right-hand drive. They cover the full footwell with raised edges and clip to the factory anchors, so they cannot slide under the pedals. Universal mats are cheaper but rarely sit safely.",
+    "checks": [
+      "Cut for right-hand drive. Many mats sold online are patterned for left-hand-drive markets and do not fit our footwells.",
+      "Made for your model and year, with holes for the factory anchor clips.",
+      "Raised edges to hold water and sand during the monsoon.",
+      "No interference with the accelerator, brake or clutch at full travel.",
+      "Material you can hose down. Multi-layer mats with a removable top are the easiest to clean.",
+      "A boot mat in the same set, if you carry groceries or wet gear."
+    ],
+    "costDrivers": ["Moulded tray, multi-layer or carpet", "Number of rows and whether a boot mat is included", "Brand and material thickness"],
+    "notes": {
+      "ev": "Electric cars often have a flat floor with no centre tunnel, so the rear mat is usually a single piece. Check the set you are offered matches that shape.",
+      "kei": "Kei cars have short, flat footwells. A model-specific set matters here because generic mats are usually too long.",
+      "van": "For a van, ask whether the set covers only the front row or the passenger area too.",
+      "pickup": "For a pickup, deep tray-type rubber mats cope best with mud and site boots."
+    },
+    "faqs": [
+      {"q": "What is the difference between 3D, 5D and 7D mats?", "a": "These are trade names, not standards. They generally mean a moulded mat with raised sides, with higher numbers adding more layers or quilting. Judge the fit and material in person, not the number."},
+      {"q": "Will mats for a left-hand-drive {vehicle} fit mine?", "a": "No. The driver's footwell, pedals and footrest are mirrored, so a left-hand-drive set will not sit correctly. Confirm the set is right-hand drive before paying."},
+      {"q": "Are rubber or carpet mats better for Sri Lanka?", "a": "Rubber or moulded mats, for most people. They hold water and sand and can be hosed clean. Carpet mats feel nicer but stay damp in the wet months."}
+    ]
+  },
+  {
+    "slug": "reverse-camera",
+    "name": "Reverse camera",
+    "plural": "Reverse cameras",
+    "for": ["car", "suv", "van", "pickup"],
+    "fitTime": "1 to 2 hours",
+    "fittedAt": "Accessory shop or auto electrician",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "A rear camera that shows what is behind you on the dashboard screen when you select reverse.",
+    "answer": "For a {vehicle}, first check whether a factory reverse camera is already fitted and simply not connected to the current screen. If it is, an adapter is cheaper than a new camera. If not, choose a waterproof wide-angle camera with guidelines and have it wired to the reverse light circuit.",
+    "checks": [
+      "Whether a factory camera already exists behind the boot handle or badge.",
+      "A screen to show the picture: the existing head unit, a new Android player or a mirror monitor.",
+      "Waterproof rating and low-light performance. Cheap cameras wash out at night.",
+      "Parking guidelines, ideally adjustable.",
+      "A neat mount that uses an existing number-plate light or handle position, with no visible drilling.",
+      "Sealed cable entry into the boot so rainwater does not follow the wire in."
+    ],
+    "costDrivers": ["Camera quality", "Whether a screen or adapter is also needed", "Cable length and how much trim must be removed", "Adding parking sensors at the same time"],
+    "notes": {
+      "reconditioned": "Reconditioned Japanese imports very often have a factory camera wired for the original Japanese head unit. If you are replacing that head unit, ask for the adapter that keeps the factory camera working.",
+      "new": "On a brand-new car with a factory camera, there is usually nothing to add. Check the camera view on a test drive before buying an aftermarket one.",
+      "van": "A van needs a longer cable run and benefits from a camera mounted high on the rear door for a view down over the bumper.",
+      "pickup": "On a pickup, a tailgate-handle camera gives the cleanest result. Make sure the cable is protected where the tailgate hinges.",
+      "ev": "On an electric car, the fitter should tap only the 12V reverse-light circuit. Ask the agent whether this affects the warranty."
+    },
+    "faqs": [
+      {"q": "Can a reverse camera be added to any {vehicle}?", "a": "Yes. If the car has a screen with a camera input, the camera connects to it. If not, the picture can be shown on a replacement head unit or a rear-view mirror monitor."},
+      {"q": "Reverse camera or parking sensors?", "a": "A camera shows low obstacles and children that sensors can miss. Sensors warn you by sound without looking at a screen. Fitting both together costs less than doing them separately."},
+      {"q": "Does fitting a camera need drilling?", "a": "Usually not. Most cameras mount in place of a number-plate light, in the boot handle, or on a bracket behind the number plate."}
+    ]
+  },
+  {
+    "slug": "android-player",
+    "name": "Android player",
+    "plural": "Android players",
+    "for": ["car", "suv", "van", "pickup"],
+    "excludes": ["ev"],
+    "fitTime": "1 to 3 hours",
+    "fittedAt": "Car audio or accessory shop",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "A touchscreen head unit with navigation, phone mirroring and a reverse camera input.",
+    "answer": "For a {vehicle}, choose an Android player sold with the fascia frame and wiring harness for your exact model, so it fits the dashboard without cutting and keeps the steering-wheel buttons and reverse camera working. Wireless Apple CarPlay and Android Auto matter more day to day than processor speed.",
+    "checks": [
+      "A model-specific fascia frame and plug-in harness. No cut wires.",
+      "Steering-wheel controls and the factory reverse camera still work afterwards.",
+      "Wireless Apple CarPlay and Android Auto.",
+      "Enough memory to stay responsive. Very cheap units slow down within a year.",
+      "A screen that is readable in direct sun.",
+      "A local warranty, and the original head unit returned to you."
+    ],
+    "costDrivers": ["Screen size and quality", "Memory and processor", "Brand and warranty", "Fascia frame, harness and camera adapters"],
+    "notes": {
+      "reconditioned": "Japanese-market head units are a common reason to upgrade. Their menus and maps are in Japanese, and their FM tuners cover a lower band than Sri Lankan stations use, so many local stations cannot be received without a band expander or a new unit.",
+      "hybrid": "On some hybrids the factory screen also shows energy-flow and vehicle settings. Ask the fitter which functions you keep and which you lose before replacing it.",
+      "new": "On a brand-new car, check the agent's warranty position before changing the head unit, and keep the original unit to refit if needed.",
+      "kei": "Kei cars usually take a standard-size unit, which keeps the fascia simple and the price down.",
+      "van": "For a van, consider adding a rear camera at the same time. The wiring is already exposed during fitting."
+    },
+    "faqs": [
+      {"q": "Why can't my Japanese car radio pick up Sri Lankan stations?", "a": "Radios made for Japan tune a lower FM band than the one used here, so stations at the upper end of the dial are out of range. A band expander shifts the signal, or a replacement head unit solves it properly."},
+      {"q": "Will an Android player keep the steering controls on my {vehicle}?", "a": "Yes, if it is supplied with the correct harness or control adapter for the model. Confirm this before fitting and test every button before you leave the shop."},
+      {"q": "Is a more expensive Android player worth it?", "a": "Up to a point. Pay for enough memory, a bright screen and a real warranty. Beyond that, extra processor cores make little difference to maps and music."}
+    ]
+  },
+  {
+    "slug": "gps-tracker",
+    "name": "GPS tracker",
+    "plural": "GPS trackers",
+    "for": ["car", "suv", "van", "pickup", "motorbike", "scooter", "three-wheeler"],
+    "fitTime": "Under 1 hour",
+    "fittedAt": "Auto electrician, accessory shop or at your home",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "A hidden device that reports your vehicle's location to your phone and alerts you if it moves.",
+    "answer": "For a {vehicle}, a wired GPS tracker hidden behind the trim is more dependable than a battery-powered one. Check what the monthly or yearly data plan costs, whether the app sends movement and power-cut alerts, and whether an engine cut-off is included.",
+    "checks": [
+      "Wired to the vehicle's power with a small backup battery, so it keeps reporting if disconnected.",
+      "The ongoing subscription cost, and which mobile network the SIM uses.",
+      "Alerts for ignition on, movement, speeding and power cut.",
+      "Remote engine cut-off, if you want it, fitted by someone who knows the vehicle's wiring.",
+      "An app that is still maintained. Ask to see it working on the seller's phone.",
+      "A hidden installation position that is not the first place a thief would look."
+    ],
+    "costDrivers": ["Device type and backup battery", "Subscription length", "Engine cut-off relay", "Number of vehicles if you are tracking a fleet"],
+    "notes": {
+      "motorbike": "Motorbikes are stolen far more easily than cars. Choose a compact waterproof tracker hidden under the seat or tank cover, with a movement alert so you know the moment the bike is lifted.",
+      "scooter": "On a scooter, the tracker usually hides under the front panel or the seat bucket. Make sure it is waterproof and draws very little power, because scooter batteries are small.",
+      "three-wheeler": "For a hired-out three-wheeler, trip history and daily distance reports are as useful as theft alerts. Ask for an app that shows both.",
+      "ev": "On an electric vehicle, the tracker must be connected only to the 12V system. Many electric cars also have a manufacturer app with location, so check what you already have.",
+      "van": "For vans used in business, ask about fleet features: driver reports, route history and geofence alerts.",
+      "pickup": "For a work pickup, geofence alerts tell you if the vehicle leaves a site or district outside working hours."
+    },
+    "faqs": [
+      {"q": "Do GPS trackers need a monthly fee?", "a": "Yes, in almost every case. The tracker uses a mobile SIM to send its location, and the seller charges for the data and the app, either monthly or yearly. Ask for the total cost over two years."},
+      {"q": "Can a tracker stop my {vehicle} if it is stolen?", "a": "Only if it is fitted with an engine cut-off relay. This lets you disable the vehicle from the app once it has stopped. It must be wired carefully so it can never cut power while moving."},
+      {"q": "Will leasing companies accept my own tracker?", "a": "Some finance providers ask for a tracker from their own supplier. If your vehicle is leased, check their requirement before buying one separately."}
+    ]
+  },
+  {
+    "slug": "ev-home-charger",
+    "name": "EV home charger",
+    "plural": "EV home chargers",
+    "for": ["car", "suv"],
+    "requires": ["ev"],
+    "fitTime": "Half a day to a full day, after an electrician has inspected your supply",
+    "fittedAt": "At your home, by a qualified electrician",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "A wall-mounted charger on its own circuit that charges an electric car faster and more safely than a plug socket.",
+    "answer": "To charge a {vehicle} at home, have a wall charger installed on a dedicated circuit with its own breaker and proper earthing. Before buying, an electrician must check what your house supply can deliver, because that decides how fast you can charge. If you have rooftop solar, ask for a charger that can follow solar output.",
+    "checks": [
+      "A site inspection first. Your supply rating and the distance from the meter to the parking spot decide the cost.",
+      "The connector type your car uses. Confirm it with your agent before ordering a charger.",
+      "A dedicated circuit with the correct breaker, earth-leakage protection and earthing.",
+      "A weatherproof rating if the charger is outdoors.",
+      "Solar-aware or scheduled charging, to use daytime solar or cheaper night rates.",
+      "Who certifies the installation, and whether your electricity provider needs to be told."
+    ],
+    "costDrivers": ["Charger power and brand", "Cable run from the distribution board", "Whether the supply needs upgrading", "Smart features such as solar matching and load balancing"],
+    "notes": {
+      "ev": "The portable charger supplied with most electric cars works from a normal socket but is slow and loads household wiring for many hours. It is meant for occasional use. A wall charger on its own circuit is the safer daily solution.",
+      "new": "Ask the agent whether a home charger or installation is bundled with the car before you buy one separately."
+    },
+    "faqs": [
+      {"q": "Can I charge my {vehicle} from a normal plug socket?", "a": "Yes, with the portable charger supplied with the car, but slowly. A socket and its wiring are not designed to carry a high load for ten hours every night, so have an electrician check the socket and circuit if you rely on it."},
+      {"q": "Do I need three-phase power for an EV charger?", "a": "Not necessarily. A single-phase wall charger suits most overnight charging. What matters is how much spare capacity your supply has, which an electrician can measure. Faster charging may need a supply upgrade through your electricity provider."},
+      {"q": "Can rooftop solar charge my car?", "a": "Yes. A solar-aware charger can adjust its rate to match what your panels are producing, so daytime charging uses your own power. This works best if the car is at home during the day."}
+    ]
+  },
+  {
+    "slug": "helmet",
+    "name": "Helmet",
+    "plural": "Helmets",
+    "for": ["motorbike", "scooter"],
+    "fitTime": "No fitting. Try it on before you buy",
+    "fittedAt": "Helmet or riding gear shop",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "The one accessory the law and common sense both require for rider and pillion.",
+    "answer": "For riding a {vehicle}, buy a helmet that carries a recognised safety mark, fits snugly without pressure points, and has a clear, scratch-free visor. A full-face helmet protects the jaw, which open-face designs leave exposed. Try it on in the shop and fasten the strap before deciding.",
+    "checks": [
+      "A recognised safety certification mark such as SLS, ECE or DOT on the shell, not just a sticker claim on the box.",
+      "A snug fit. It should not rotate on your head when you shake it, and the cheek pads should press lightly.",
+      "A full-face or modular design for the best protection.",
+      "A clear visor for night riding. Tinted visors are for daytime only.",
+      "Ventilation that works at city speeds.",
+      "A second helmet for your pillion. They are required to wear one too."
+    ],
+    "costDrivers": ["Certification standard", "Full-face, modular or open-face", "Shell material and weight", "Brand, visor quality and removable liners"],
+    "notes": {
+      "scooter": "Scooter riders often choose open-face helmets for short trips. A light full-face helmet with good vents gives much better protection for nearly the same comfort.",
+      "motorbike": "For a motorbike used on highways, a full-face helmet with a good visor seal cuts wind noise and fatigue as well as protecting you.",
+      "ev": "Electric scooters are quiet and quicker off the line than they look. Wear the same standard of helmet you would on a petrol bike."
+    },
+    "faqs": [
+      {"q": "Is a helmet compulsory in Sri Lanka?", "a": "Yes. Both the rider and the pillion passenger must wear a helmet, and police enforce it."},
+      {"q": "How do I know a helmet is the right size?", "a": "Measure around your head above the eyebrows and compare with the maker's chart, then try it on. It should feel tight at first, stay put when you shake your head, and not press on your forehead."},
+      {"q": "When should I replace my helmet?", "a": "After any crash or a hard drop, even if it looks fine, because the inner liner crushes once. Otherwise replace it roughly every five years, or sooner if the liner loosens."}
+    ]
+  },
+  {
+    "slug": "phone-holder",
+    "name": "Phone holder",
+    "plural": "Phone holders",
+    "for": ["motorbike", "scooter"],
+    "fitTime": "15 to 45 minutes, longer with a wired charger",
+    "fittedAt": "Bike accessory shop or self-fit",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "A handlebar or mirror mount that holds your phone for navigation, with optional charging.",
+    "answer": "For a {vehicle}, choose a phone holder that locks the phone mechanically, not by spring pressure alone, and includes vibration damping to protect the phone's camera. If you ride for work, add a waterproof USB charger wired through a fuse to the battery.",
+    "checks": [
+      "A locking clamp or twist-lock that survives potholes.",
+      "A vibration damper. Engine vibration can damage the stabiliser in modern phone cameras.",
+      "A mount that suits your bars or mirror stem without blocking the instruments.",
+      "A waterproof USB charger with its own fuse, switched with the ignition.",
+      "A rain cover or a waterproof phone if you ride in the wet months.",
+      "Metal mounting hardware. Thin plastic arms crack in the sun."
+    ],
+    "costDrivers": ["Mount type and material", "Vibration damper", "Wired or wireless charging", "Fitting and wiring"],
+    "notes": {
+      "scooter": "Most scooters have covered handlebars, so the holder usually mounts on the mirror stem. Check the kit includes a mirror-stem adapter.",
+      "motorbike": "On a motorbike with exposed bars, a bar clamp near the centre is the most stable position. Single-cylinder bikes vibrate strongly, so do not skip the damper.",
+      "ev": "On an electric scooter, take charger power only from the 12V accessory circuit, or use a power bank. Do not let anyone tap the main battery pack."
+    },
+    "faqs": [
+      {"q": "Can a bike phone holder damage my phone?", "a": "The holder itself will not, but engine vibration can harm the optical stabiliser in some phone cameras over time. A holder with a vibration damper greatly reduces the risk."},
+      {"q": "Is it legal to use a phone on a holder while riding?", "a": "Using a mounted phone for navigation is common, but handling it while moving is unsafe and can get you stopped. Set the route before you move off."},
+      {"q": "Will a USB charger drain the battery of my {vehicle}?", "a": "Not if it is wired to switch off with the ignition. A charger connected directly to the battery draws a small current all the time and can flatten a small battery over a few weeks."}
+    ]
+  },
+  {
+    "slug": "top-box",
+    "name": "Top box",
+    "plural": "Top boxes",
+    "for": ["motorbike", "scooter"],
+    "fitTime": "30 minutes to 1 hour with the correct rack",
+    "fittedAt": "Bike accessory shop",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "A lockable box behind the seat for a helmet, shopping or delivery loads.",
+    "answer": "For a {vehicle}, the rack matters more than the box. Use a carrier made for the model that bolts to the frame's mounting points, then choose a box big enough for a full-face helmet with a quick-release base plate and a real lock.",
+    "checks": [
+      "A model-specific rear carrier bolted to the frame, not to plastic body panels.",
+      "Capacity. Around 30 litres or more holds one full-face helmet.",
+      "The carrier's load limit, and keeping heavy items out of the box.",
+      "A quick-release base plate so the box can come off in seconds.",
+      "A backrest pad if you carry a pillion.",
+      "A proper keyed lock and a rubber seal that keeps rain out."
+    ],
+    "costDrivers": ["Box capacity and brand", "Model-specific carrier", "Backrest, brake light and inner liner", "Fitting"],
+    "notes": {
+      "scooter": "Many scooters already have a grab rail with mounting holes. A carrier plate for the model bolts on without modification.",
+      "motorbike": "On a sport-style motorbike with a split seat and short tail, check that a carrier exists for the model before buying a box.",
+      "ev": "On an electric scooter, extra weight on the tail reduces range slightly. Keep the box light and the load modest."
+    },
+    "faqs": [
+      {"q": "Does a top box affect handling?", "a": "A lightly loaded box makes little difference. Heavy loads high and behind the rear axle make the steering feel light, so keep heavy items low and respect the carrier's load limit."},
+      {"q": "What size top box do I need for a helmet?", "a": "About 30 litres for one full-face helmet and roughly 45 litres or more for two. Take your helmet to the shop and test it."},
+      {"q": "Can a top box be fitted to any {vehicle}?", "a": "It needs a rear carrier designed for the model. Where no ready-made carrier exists, a fabricator can make one, but check how it attaches to the frame."}
+    ]
+  },
+  {
+    "slug": "crash-guard",
+    "name": "Crash guard",
+    "plural": "Crash guards",
+    "for": ["motorbike"],
+    "fitTime": "30 minutes to 1 hour",
+    "fittedAt": "Bike accessory shop or workshop",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "A steel bar around the engine that takes the impact when the bike tips over.",
+    "answer": "For a {vehicle}, fit a crash guard built for the model that bolts to the frame's engine mounting points. Thick-walled steel tube with clean welds protects the engine cases, tank and your legs in a low-speed fall. Avoid universal guards held on by clamps.",
+    "checks": [
+      "Made for the model, using existing frame and engine mount bolts.",
+      "Tube wall thickness and weld quality. Thin decorative guards fold on impact.",
+      "Clearance for steering lock, footpegs and your knees.",
+      "Powder-coated or stainless finish to resist rust in coastal air.",
+      "Rubber or nylon sliders on the bar ends, if available.",
+      "Longer high-grade bolts supplied with the kit, correctly tightened."
+    ],
+    "costDrivers": ["Steel grade and tube thickness", "Finish", "Built-in sliders or foot rests", "Fitting"],
+    "notes": {
+      "motorbike": "A guard protects best in tip-overs and slow slides, which is how most city falls happen. It also saves the cost of levers, indicators and engine covers."
+    },
+    "faqs": [
+      {"q": "Does a crash guard affect the warranty on a {vehicle}?", "a": "A bolt-on guard that uses the standard mounting points and needs no cutting or welding normally does not, but ask your dealer. Some agents sell an approved guard for the model."},
+      {"q": "Are crash guards worth it?", "a": "For city riding, yes. One low-speed drop can break a lever, an indicator and an engine cover. A guard usually costs less than that repair."},
+      {"q": "Can a crash guard damage the frame?", "a": "A well-designed guard spreads the load across strong mounting points. A poorly made one bolted to a single point can bend its mount in a heavy fall, which is why model-specific design matters."}
+    ]
+  },
+  {
+    "slug": "bike-seat-cover",
+    "name": "Bike seat cover",
+    "plural": "Bike seat covers",
+    "for": ["motorbike", "scooter"],
+    "fitTime": "15 to 30 minutes",
+    "fittedAt": "Bike accessory or upholstery shop",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "A fitted cover that protects the seat from sun and rain and keeps it cooler to sit on.",
+    "answer": "For a {vehicle}, choose a seat cover cut for the model in a waterproof, non-slip material. A mesh or textured top stays cooler after parking in the sun, and stapled or elastic-hemmed fitting keeps it from shifting under braking.",
+    "checks": [
+      "Cut for the model's seat shape, including a stepped pillion section.",
+      "A waterproof layer so the foam underneath stays dry.",
+      "A non-slip top surface.",
+      "Heat resistance. Black vinyl gets very hot in direct sun; mesh tops help.",
+      "Secure fitting: stapled to the seat base or a strong elastic hem.",
+      "Double stitching along the seams that take your weight."
+    ],
+    "costDrivers": ["Material", "Tailored or universal", "Added foam or gel padding", "Fitting"],
+    "notes": {
+      "scooter": "Scooter seats lift to reach the storage bucket and fuel cap. Make sure the cover does not snag the hinge or latch.",
+      "motorbike": "On a split-seat motorbike you need two pieces. Confirm the set covers both rider and pillion seats."
+    },
+    "faqs": [
+      {"q": "Should I recover the seat or add a cover over it?", "a": "If the original cover is torn or the foam is wet, have the seat reupholstered. If it is in good condition, a slip-on or stapled cover protects it and can be removed later."},
+      {"q": "Do mesh seat covers work?", "a": "Yes. A mesh layer lets air pass under you and stops the seat storing as much heat in the sun. It also drains quickly after rain."},
+      {"q": "Will a seat cover change the seat height of my {vehicle}?", "a": "A plain cover adds almost nothing. Covers with added foam or gel raise the seat slightly, which shorter riders should check before buying."}
+    ]
+  },
+  {
+    "slug": "audio-system",
+    "name": "Audio system",
+    "plural": "Audio systems",
+    "for": ["three-wheeler"],
+    "fitTime": "1 to 3 hours",
+    "fittedAt": "Three-wheeler accessory or audio shop",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "A player, speakers and wiring sized for a three-wheeler's small battery and open cabin.",
+    "answer": "For a {vehicle}, choose a compact Bluetooth and USB player with weather-resistant speakers, wired through a fuse and switched with the ignition. A three-wheeler's battery is small, so avoid large amplifiers unless the charging system and battery are upgraded to match.",
+    "checks": [
+      "A player with Bluetooth and USB that is easy to use with one hand.",
+      "Weather-resistant speakers. The cabin is open to rain and dust.",
+      "Power drawn through its own fuse and switched off with the ignition.",
+      "Total power the battery and charging system can support.",
+      "Secure mounting that does not rattle or block the driver's view.",
+      "Volume you can keep reasonable. Loud systems attract complaints and police attention."
+    ],
+    "costDrivers": ["Player and speaker quality", "Amplifier or subwoofer", "Battery upgrade", "Custom speaker boxes and lighting"],
+    "notes": {
+      "three-wheeler": "A simple two-speaker setup with a small player is enough for most drivers and puts little load on the battery. Bigger systems should be planned together with a battery upgrade.",
+      "cargo": "On a cargo three-wheeler, keep speakers inside the cab and away from the load area, where they get knocked."
+    },
+    "faqs": [
+      {"q": "Will an audio system drain my three-wheeler's battery?", "a": "A small player and two speakers will not, if it switches off with the ignition. Amplifiers and subwoofers can flatten a standard battery quickly, especially with the engine off."},
+      {"q": "Can I add Bluetooth to an existing player?", "a": "Usually, with an inexpensive Bluetooth receiver that connects to the AUX or USB input. If the player is old, replacing it often costs little more."},
+      {"q": "How long does fitting take on a {vehicle}?", "a": "A basic player and speakers take about an hour. Custom boxes, amplifiers and lighting can take half a day."}
+    ]
+  },
+  {
+    "slug": "rain-covers",
+    "name": "Rain covers",
+    "plural": "Rain covers",
+    "for": ["three-wheeler"],
+    "fitTime": "1 to 2 hours",
+    "fittedAt": "Three-wheeler accessory or canvas shop",
+    "priceMin": null,
+    "priceMax": null,
+    "summary": "Roll-down side curtains that keep passengers and seats dry in the monsoon.",
+    "answer": "For a {vehicle}, fit side rain covers with clear panels so the driver can still see mirrors and traffic. Heavy-duty material with stitched edges and proper fasteners lasts several seasons; thin plastic sheets tear in the first strong wind.",
+    "checks": [
+      "Clear window panels on both sides, positioned at the driver's eye line.",
+      "Thick, UV-resistant material with stitched and bound edges.",
+      "Fasteners that hold at speed: press studs, zips or straps, not tape.",
+      "Covers that roll up and strap neatly when dry.",
+      "A fit made for the model's frame, including the rear passenger opening.",
+      "Easy passenger entry and exit without unfastening everything."
+    ],
+    "costDrivers": ["Material thickness", "Clear panel size and quality", "Zips versus studs", "Custom colours and branding"],
+    "notes": {
+      "three-wheeler": "If you hire the vehicle out to tourists or run it on a ride app, clean clear panels make a real difference to ratings in the wet months.",
+      "cargo": "For a cargo three-wheeler, the priority is a waterproof load cover or canopy for the bed, with side covers for the cab second."
+    },
+    "faqs": [
+      {"q": "Do rain covers reduce visibility?", "a": "They can if the clear panels are small, scratched or fogged. Choose large clear panels and replace them when they turn cloudy."},
+      {"q": "How long do three-wheeler rain covers last?", "a": "Good-quality covers last several monsoon seasons. Sun damage is the main cause of failure, so roll them up when it is dry."},
+      {"q": "Can rain covers be made for any {vehicle}?", "a": "Yes. Shops hold patterns for the common models and can cut to measure for others, usually the same day."}
+    ]
+  }
+]
