@@ -21,6 +21,15 @@
     } catch (e) {}
   });
 
+  // Outbound clicks to listed shops: the record that proves what the site sends them.
+  document.querySelectorAll('a[data-shop]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var shop = a.dataset.shop, acc = a.dataset.acc || '';
+      try { if (window.gtag) window.gtag('event', 'shop_click', { shop_name: shop, accessory: acc, page_path: location.pathname }); } catch (e) {}
+      try { if (VG.lead && navigator.sendBeacon) navigator.sendBeacon(VG.lead, new Blob([JSON.stringify({ kind: 'shop_click', shop: shop, accessory: acc, page: location.pathname, time: new Date().toISOString() })], { type: 'text/plain' })); } catch (e) {}
+    });
+  });
+
   // Quote forms
   document.querySelectorAll('form[data-quote]').forEach(function (f) {
     f.addEventListener('submit', function (ev) {
@@ -29,7 +38,7 @@
       var vehicle = f.dataset.vehicle || get('vehicle');
       var need = f.dataset.need || get('need');
       var area = get('area');
-      var msg = 'Hi VehicleGuide, I would like 3 quotes';
+      var msg = 'Hi VehicleGuide, I need help finding a shop';
       if (need) msg += ' for ' + need.toLowerCase();
       if (vehicle) msg += ' for my ' + vehicle;
       msg += '.';

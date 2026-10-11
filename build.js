@@ -10,6 +10,7 @@ const OUT = path.join(ROOT, 'dist');
 const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'site.config.json'), 'utf8'));
 const vehicles = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/vehicles.json'), 'utf8'));
 const accessories = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/accessories.json'), 'utf8'));
+const shops = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/shops.json'), 'utf8'));
 
 const BASE = (process.env.BASE_PATH || '').replace(/\/$/, '');
 const SITE = (process.env.SITE_URL || cfg.siteUrl).replace(/\/$/, '');
@@ -63,7 +64,7 @@ const priceText = a => (a.priceMin && a.priceMax)
   : null;
 
 const waText = (v, a) => {
-  let t = 'Hi VehicleGuide, I would like 3 quotes';
+  let t = 'Hi VehicleGuide, I need help finding a shop';
   if (a) t += ` for ${lower1(a.name)}`;
   if (v) t += ` for my ${v.full}`;
   return t + '. My area: ';
@@ -129,10 +130,10 @@ ${ga}
     <nav aria-label="Main">
       <a href="${url('/vehicles/')}">Vehicles</a>
       <a href="${url('/accessories/')}">Accessories</a>
-      <a href="${url('/how-it-works/')}">How it works</a>
+      <a href="${url('/where-to-buy/')}">Where to buy</a>
       <a href="${url('/for-shops/')}">For shops</a>
     </nav>
-    <a class="btn btn-go btn-sm" data-wa href="${waLink(waText())}" rel="nofollow noopener">Get 3 quotes</a>
+    <a class="btn btn-dark btn-sm" href="${url('/where-to-buy/')}">Find a shop</a>
   </div>
 </header>
 ${crumbs && crumbs.length > 1 ? `<nav class="crumbs wrap" aria-label="Breadcrumb"><ol>${crumbs.map((c, i) => i === crumbs.length - 1 ? `<li aria-current="page">${esc(c[0])}</li>` : `<li><a href="${url(c[1])}">${esc(c[0])}</a></li>`).join('')}</ol></nav>` : ''}
@@ -143,7 +144,7 @@ ${body}
   <div class="wrap foot-grid">
     <div>
       <a class="plate-logo" href="${url('/')}"><span>VEHICLE</span><span>GUIDE</span></a>
-      <p>An independent guide to vehicle accessories in Sri Lanka. We are not a shop and we are not affiliated with any vehicle manufacturer. Quotes come from independent fitters.</p>
+      <p>An independent guide to vehicle accessories in Sri Lanka. We are not a shop and we are not affiliated with any vehicle manufacturer. Shops listed here are independent businesses.</p>
     </div>
     <div>
       <h2>Browse</h2>
@@ -156,6 +157,7 @@ ${body}
     <div>
       <h2>VehicleGuide</h2>
       <ul>
+        <li><a href="${url('/where-to-buy/')}">Where to buy</a></li>
         <li><a href="${url('/how-it-works/')}">How it works</a></li>
         <li><a href="${url('/for-shops/')}">List your shop</a></li>
         <li><a href="${url('/about/')}">About and sources</a></li>
@@ -174,12 +176,12 @@ ${body}
 // ---------- shared blocks ----------
 const quoteForm = (v, a, heading) => `
 <form class="quote" data-quote${v ? ` data-vehicle="${esc(v.full)}"` : ''}${a ? ` data-need="${esc(a.name)}"` : ''} action="#">
-  <h2>${esc(heading || 'Get 3 fitted prices on WhatsApp')}</h2>
-  <p>Tell us where you are. We ask fitters near you and send back three quotes, usually within a day. Free, and you deal with the shop you choose.</p>
+  <h2>${esc(heading || 'Not sure where to go? Ask us')}</h2>
+  <p>Tell us your area and we will point you to a shop that does this near you. Free.</p>
   ${v ? '' : `<label>Your vehicle<input name="vehicle" autocomplete="off" placeholder="e.g. Toyota Raize 2022" required></label>`}
   ${a ? '' : `<label>What you need<input name="need" autocomplete="off" placeholder="e.g. dashcam, seat covers"></label>`}
   <label>Your town or area<input name="area" autocomplete="address-level2" placeholder="e.g. Dehiwala" required></label>
-  <button class="btn btn-go" type="submit">Send on WhatsApp</button>
+  <button class="btn btn-dark" type="submit">Ask on WhatsApp</button>
   <noscript><p><a class="btn btn-go" href="${waLink(waText(v, a))}" rel="nofollow noopener">Open WhatsApp</a></p></noscript>
   <p class="fine">Opens WhatsApp with your request filled in. We only use your number to reply.</p>
 </form>`;
@@ -193,19 +195,35 @@ const faqBlock = (faqs, heading = 'Common questions') => `
 const vehRow = v => `<li><a class="row" href="${url(v.path)}">${icon(v.typeInfo.icon)}<span class="row-main"><strong>${esc(v.full)}</strong><span>${esc(v.body)}, ${esc(lower1(v.power))}</span></span><span class="row-meta">${v.acc.length} guides</span></a></li>`;
 const vehList = list => `<ul class="rows">${list.map(vehRow).join('')}</ul>`;
 
+const shopsFor = (a, v) => shops.filter(sh => sh.sells.includes(a.slug) && (!v || !sh.only || sh.only.some(t => v.tags.includes(t))));
+const out = sh => { const u = new URL(sh.url); u.searchParams.set('utm_source', cfg.domain); u.searchParams.set('utm_medium', 'referral'); return u.toString(); };
+const host = sh => new URL(sh.url).hostname.replace(/^www\./, '');
+const shopCard = (sh, a) => `<li class="shop"><div><strong>${esc(sh.name)}</strong><span class="shop-area">${esc(sh.area)}</span><p>${esc(sh.about)}</p></div><a class="btn btn-go btn-sm" data-shop="${esc(sh.name)}"${a ? ` data-acc="${esc(a.slug)}"` : ''} href="${esc(out(sh))}" target="_blank" rel="noopener">Visit ${esc(host(sh))}</a></li>`;
+const shopNote = `<p class="fine">Listings are free and unpaid, taken from each shop's own website and checked ${esc(cfg.updatedLabel)}. We have not tested these shops. Confirm price, stock and warranty with them before paying.</p>`;
+const listCta = `<a data-wa href="${waLink('Hi VehicleGuide, I run a shop and would like a free listing. Shop name, town and what we fit: ')}" rel="nofollow noopener">Run a shop? Get listed free</a>`;
+const shopSection = (list, a, v) => `
+      <section id="where-to-buy">
+        <h2>Where to buy ${esc(lower1(a.name))}${v ? ` for a ${esc(v.full)}` : ' in Sri Lanka'}</h2>
+        ${list.length
+          ? `<ul class="shops">${list.map(sh => shopCard(sh, a)).join('')}</ul>${shopNote}<p class="fine">${listCta}</p>`
+          : `<div class="empty"><p>We have not verified a shop for this yet, and we would rather show nothing than guess. <a data-wa href="${waLink(waText(v, a))}" rel="nofollow noopener">Ask us on WhatsApp</a> and we will point you to one.</p><p class="fine">${listCta}</p></div>`}
+      </section>`;
+const shopSide = (list, a) => list.length ? `<div class="box box-buy"><h2>Where to buy</h2><ul class="links">${list.map(sh => `<li><a data-shop="${esc(sh.name)}" data-acc="${esc(a.slug)}" href="${esc(out(sh))}" target="_blank" rel="noopener">${esc(sh.name)}</a><span>${esc(sh.area)}</span></li>`).join('')}</ul><p class="fine"><a href="#where-to-buy">About these listings</a></p></div>` : '';
+
 // ---------- money page: vehicle x accessory ----------
 function moneyPage(v, a) {
   const p = `${v.path}${a.slug}/`;
   const price = priceText(a);
+  const list = shopsFor(a, v);
   const title = `${a.name} for ${v.full} in Sri Lanka: Price & Fitting`;
-  const desc = `${a.name} for the ${v.full}: what to check, fitting time and what drives the price in Sri Lanka. Get three fitted quotes on WhatsApp.`;
+  const desc = `${a.name} for the ${v.full}: what to check, fitting time and what drives the price in Sri Lanka, and where to buy it.`;
   const notes = Object.entries(a.notes || {}).filter(([tag]) => v.tags.includes(tag)).map(([, t]) => t);
   const faqs = a.faqs.map(f => ({ q: fill(f.q, v), a: fill(f.a, v) }));
   faqs.unshift({
     q: `${a.name} price for a ${v.full} in Sri Lanka: what should I expect to pay?`,
     a: price
       ? `Expect ${price}. The final figure depends on ${a.costDrivers.slice(0, 3).map(lower1).join(', ')}.`
-      : `It depends mainly on ${a.costDrivers.slice(0, 3).map(lower1).join(', ')}. Prices move with import costs and exchange rates, so we collect live quotes instead of publishing a figure that goes stale. Ask on WhatsApp and we send three current prices.`
+      : `It depends mainly on ${a.costDrivers.slice(0, 3).map(lower1).join(', ')}. Prices move with import costs and exchange rates, so we do not publish a figure that would go stale. ${list.length ? `Ask the shops listed on this page for a fitted price and compare at least two.` : `Ask at least two shops for a fitted price and compare.`}`
   });
   const others = v.acc.filter(x => x !== a);
   const sameType = a.vehicles.filter(x => x !== v && x.type === v.type).slice(0, 8);
@@ -220,12 +238,14 @@ function moneyPage(v, a) {
       </div>
       <table class="facts">
         <caption>Quick facts</caption>
-        <tr><th scope="row">Price</th><td>${price ? esc(price) : `Quoted on request. <a data-wa href="${waLink(waText(v, a))}" rel="nofollow noopener">Ask for today's price</a>`}</td></tr>
+        <tr><th scope="row">Price</th><td>${price ? esc(price) : (list.length ? `Ask the shops below for a fitted price` : `Varies by shop. <a data-wa href="${waLink(waText(v, a))}" rel="nofollow noopener">Ask us where to go</a>`)}</td></tr>
         <tr><th scope="row">Fitting time</th><td>${esc(a.fitTime)}</td></tr>
         <tr><th scope="row">Where it is done</th><td>${esc(a.fittedAt)}</td></tr>
         <tr><th scope="row">Vehicle</th><td>${esc(v.full)}, ${esc(lower1(v.body))}, ${esc(lower1(v.power))}</td></tr>
         <tr><th scope="row">Reviewed</th><td><time datetime="${cfg.updated}">${esc(cfg.updatedLabel)}</time></td></tr>
       </table>
+
+      ${shopSection(list, a, v)}
 
       ${notes.length ? `<section><h2>What is specific to the ${esc(v.full)}</h2>${notes.map(n => `<p>${esc(n)}</p>`).join('')}</section>` : ''}
 
@@ -249,7 +269,8 @@ function moneyPage(v, a) {
       </section>
     </div>
     <aside class="side">
-      ${quoteForm(v, a, `Get 3 prices for your ${v.full}`)}
+      ${shopSide(list, a)}
+      ${quoteForm(v, a)}
       ${others.length ? `<div class="box"><h2>More for the ${esc(v.full)}</h2><ul class="links">${others.map(x => `<li><a href="${url(v.path + x.slug + '/')}">${esc(x.name)}</a></li>`).join('')}</ul></div>` : ''}
       ${sameType.length ? `<div class="box"><h2>${esc(a.plural)} for other ${esc(lower1(v.typeInfo.name))}</h2><ul class="links">${sameType.map(x => `<li><a href="${url(x.path + a.slug + '/')}">${esc(x.full)}</a></li>`).join('')}</ul></div>` : ''}
     </aside>
@@ -265,14 +286,14 @@ function moneyPage(v, a) {
 // ---------- vehicle hub ----------
 function vehiclePage(v) {
   const title = `${v.full} Accessories in Sri Lanka: Guides & Prices`;
-  const desc = `Accessory guides for the ${v.full} in Sri Lanka: ${v.acc.slice(0, 4).map(a => lower1(a.name)).join(', ')} and more. What to check, fitting times and three quotes on WhatsApp.`;
+  const desc = `Accessory guides for the ${v.full} in Sri Lanka: ${v.acc.slice(0, 4).map(a => lower1(a.name)).join(', ')} and more. What to check, fitting times and where to buy.`;
   const siblings = vehicles.filter(x => x.type === v.type && x !== v);
   const faqs = [
     { q: `Which accessories do ${v.full} owners in Sri Lanka fit first?`, a: `The most common first additions are ${v.acc.slice(0, 3).map(a => lower1(a.name)).join(', ')}. Each guide on this page explains what to check and how long fitting takes.` },
     { q: `Do accessories affect the warranty on a ${v.full}?`, a: v.tags.includes('new') || v.tags.includes('ev')
         ? `They can, if the work involves the vehicle's wiring. Ask the agent before any electrical accessory is fitted, use a fitter who works with plug-in harnesses instead of cutting wires, and keep the invoice.`
         : `Most ${v.full}s here are sold without a manufacturer warranty, so the question is usually the importer's or dealer's own cover. Ask them before electrical work, and choose a fitter who does not cut the original wiring.` },
-    { q: `How do I get prices for ${v.full} accessories?`, a: `Send us your area on WhatsApp with what you need. We ask fitters near you and return three quotes, usually within a day. The service is free for vehicle owners.` }
+    { q: `Where can I buy ${v.full} accessories in Sri Lanka?`, a: `Each guide on this page lists shops and fitters that sell or install that accessory, with their area and a link. Listings are free and unpaid. If nothing suits, message us on WhatsApp and we will point you to a shop.` }
   ];
   const body = `
 <article class="wrap page">
@@ -297,7 +318,7 @@ function vehiclePage(v) {
       ${faqBlock(faqs, `${v.full} accessories: common questions`)}
       ${siblings.length ? `<section><h2>Other ${esc(lower1(v.typeInfo.name))}</h2>${vehList(siblings)}</section>` : ''}
     </div>
-    <aside class="side">${quoteForm(v, null, `Get 3 prices for your ${v.full}`)}</aside>
+    <aside class="side">${quoteForm(v, null)}</aside>
   </div>
 </article>`;
   write(v.path, layout({
@@ -313,12 +334,12 @@ function typePage(t) {
   const accs = accessories.filter(a => list.some(v => v.acc.includes(a)));
   const p = `/${t.slug}/`;
   const title = `${t.name}: Accessory Guides and Fitted Prices in Sri Lanka`;
-  const desc = `Accessory guides for popular ${lower1(t.name)} in Sri Lanka, including ${list.slice(0, 3).map(v => v.full).join(', ')}. Compare what to check and get three quotes on WhatsApp.`;
+  const desc = `Accessory guides for popular ${lower1(t.name)} in Sri Lanka, including ${list.slice(0, 3).map(v => v.full).join(', ')}. See what to check and where to buy.`;
   const body = `
 <section class="wrap page">
   <p class="kicker">${icon(t.icon)}</p>
   <h1>${esc(t.name)}: accessory guides for Sri Lanka</h1>
-  <p class="lede">Pick your ${esc(t.one)} to see the accessories that fit it, what to check before paying and how to get three fitted prices.</p>
+  <p class="lede">Pick your ${esc(t.one)} to see the accessories that fit it, what to check before paying and where to buy.</p>
   ${vehList(list)}
   <h2>Accessories for ${esc(lower1(t.name))}</h2>
   <ul class="chips">${accs.map(a => `<li><a href="${url(a.path)}">${esc(a.plural)}</a></li>`).join('')}</ul>
@@ -333,6 +354,7 @@ function accessoryPage(a) {
   const desc = `${a.summary} What to check, fitting time and what changes the price in Sri Lanka, with guides for ${a.vehicles.length} popular vehicles.`;
   const faqs = a.faqs.map(f => ({ q: f.q.replace(/\{vehicle\}/g, 'vehicle'), a: f.a.replace(/\{vehicle\}/g, 'vehicle') }));
   const price = priceText(a);
+  const list = shopsFor(a);
   const groups = TYPES.map(t => [t, a.vehicles.filter(v => v.type === t.slug)]).filter(g => g[1].length);
   const body = `
 <article class="wrap page">
@@ -342,11 +364,12 @@ function accessoryPage(a) {
       <div class="answer"><p>${esc(a.summary)} ${esc(generic(a.answer))}</p></div>
       <table class="facts">
         <caption>Quick facts</caption>
-        <tr><th scope="row">Price</th><td>${price ? esc(price) : `Quoted on request. <a data-wa href="${waLink(waText(null, a))}" rel="nofollow noopener">Ask for today's price</a>`}</td></tr>
+        <tr><th scope="row">Price</th><td>${price ? esc(price) : (list.length ? `Ask the shops below for a fitted price` : `Varies by shop. <a data-wa href="${waLink(waText(null, a))}" rel="nofollow noopener">Ask us where to go</a>`)}</td></tr>
         <tr><th scope="row">Fitting time</th><td>${esc(a.fitTime)}</td></tr>
         <tr><th scope="row">Where it is done</th><td>${esc(a.fittedAt)}</td></tr>
         <tr><th scope="row">Reviewed</th><td><time datetime="${cfg.updated}">${esc(cfg.updatedLabel)}</time></td></tr>
       </table>
+      ${shopSection(list, a)}
       <section><h2>What to check before you pay</h2><ul class="checks">${a.checks.map(c => `<li>${esc(c)}</li>`).join('')}</ul></section>
       <section><h2>What changes the price</h2><ul>${a.costDrivers.map(c => `<li>${esc(c)}</li>`).join('')}</ul></section>
       <section>
@@ -355,7 +378,7 @@ function accessoryPage(a) {
       </section>
       ${faqBlock(faqs, `${a.plural}: common questions`)}
     </div>
-    <aside class="side">${quoteForm(null, a, `Get 3 prices for ${lower1(a.plural)}`)}</aside>
+    <aside class="side">${shopSide(list, a)}${quoteForm(null, a)}</aside>
   </div>
 </article>`;
   write(a.path, layout({
@@ -368,20 +391,20 @@ function accessoryPage(a) {
 // ---------- index pages ----------
 function homePage() {
   const title = `${cfg.name}: Vehicle Accessory Guides and Fitted Prices in Sri Lanka`;
-  const desc = `Find the right accessories for your car, SUV, van, motorbike, scooter or three-wheeler in Sri Lanka. Model-by-model guides and three fitted quotes on WhatsApp.`;
+  const desc = `Find the right accessories for your car, SUV, van, motorbike, scooter or three-wheeler in Sri Lanka. Model-by-model guides, with shops and fitters that sell and install each one.`;
   const pick = vehicles.map(v => ({ n: v.full, t: v.type, p: v.path, a: v.acc.map(a => [a.slug, a.name]) }));
   const faqs = [
-    { q: 'What is VehicleGuide?', a: 'VehicleGuide is an independent guide to vehicle accessories in Sri Lanka. We publish model-by-model advice on what to fit and what to check, and we collect quotes from fitters on your behalf.' },
-    { q: 'Is the quote service free?', a: 'Yes. Vehicle owners pay nothing. Shops that join our network pay us when a job comes through, which never changes the price you are quoted.' },
+    { q: 'What is VehicleGuide?', a: 'VehicleGuide is an independent guide to vehicle accessories in Sri Lanka. We publish model-by-model advice on what to fit and what to check, and we list shops and fitters that sell and install each accessory.' },
+    { q: 'Does VehicleGuide charge anything?', a: 'No. The guides and the shop listings are free to use. Shop listings are currently free and unpaid. If we introduce paid placements, they will be clearly labelled.' },
     { q: 'Do you sell or fit accessories yourselves?', a: 'No. We are a guide, not a shop. The fitting is done by independent accessory shops and fitters, and you pay them directly.' },
-    { q: 'Which vehicles do you cover?', a: `We started with ${vehicles.length} of the most registered cars, SUVs, vans, pickups, motorbikes, scooters and three-wheelers in Sri Lanka in 2026, and we add more every month. If yours is not listed, message us and we will still get you quotes.` }
+    { q: 'Which vehicles do you cover?', a: `We started with ${vehicles.length} of the most registered cars, SUVs, vans, pickups, motorbikes, scooters and three-wheelers in Sri Lanka in 2026, and we add more every month. If yours is not listed, message us and we will point you to a shop.` }
   ];
   const body = `
 <section class="hero">
   <div class="wrap hero-in">
     <div>
       <h1>Know what to fit, and what it should cost, before you walk into the shop.</h1>
-      <p class="lede">Accessory guides for the vehicles Sri Lanka drives, written model by model. Tell us what you drive and we send three fitted prices from shops near you on WhatsApp.</p>
+      <p class="lede">Accessory guides for the vehicles Sri Lanka drives, written model by model. Pick what you drive to see what to check, what moves the price and where to buy it.</p>
     </div>
     <form class="picker" data-picker action="${url('/vehicles/')}">
       <div class="picker-plate">
@@ -430,13 +453,13 @@ function homePage() {
 
 <section class="band">
   <div class="wrap">
-    <h2>How the three-quote service works</h2>
+    <h2>How VehicleGuide works</h2>
     <ol class="steps">
-      <li><strong>Tell us your vehicle and area.</strong> One WhatsApp message. No sign-up, no app.</li>
-      <li><strong>We ask fitters near you.</strong> We send your request to accessory shops and fitters and collect their prices.</li>
-      <li><strong>You get three quotes.</strong> Usually within a day. Choose one and deal with the shop directly.</li>
+      <li><strong>Pick your vehicle.</strong> Guides are written model by model, so the advice fits what you drive.</li>
+      <li><strong>Read what to check.</strong> Know the questions to ask and what moves the price before you talk to a shop.</li>
+      <li><strong>Choose where to buy.</strong> Each guide lists shops and fitters, with their area and a link. You deal with them directly.</li>
     </ol>
-    <a class="btn btn-go" data-wa href="${waLink(waText())}" rel="nofollow noopener">Get 3 quotes on WhatsApp</a>
+    <a class="btn btn-go" href="${url('/where-to-buy/')}">See where to buy</a>
   </div>
 </section>
 
@@ -461,7 +484,7 @@ function vehiclesIndex() {
   <h1>All vehicles</h1>
   <p class="lede">${vehicles.length} of the most registered vehicles in Sri Lanka in 2026. Choose yours to see its accessory guides.</p>
   <label class="search">Find your vehicle<input type="search" data-filter placeholder="Type a make or model, e.g. Raize"></label>
-  <p class="empty" data-empty hidden>No match yet. <a data-wa href="${waLink(waText())}" rel="nofollow noopener">Message us on WhatsApp</a> and we will still get you quotes.</p>
+  <p class="empty" data-empty hidden>No match yet. <a data-wa href="${waLink(waText())}" rel="nofollow noopener">Message us on WhatsApp</a> and we will point you to a shop.</p>
   ${TYPES.map(t => `<section data-group><h2>${esc(t.name)}</h2>${vehList(vehicles.filter(v => v.type === t.slug))}</section>`).join('')}
 </section>`;
   write(p, layout({
@@ -485,12 +508,31 @@ function evPage() {
   <h2>Home charging</h2>
   <p>${esc(charger.summary)} ${esc(charger.notes.ev)}</p>
   <p><a class="more" href="${url(charger.path)}">Read the EV home charger guide</a></p>
-  <div class="narrow">${faqBlock(faqs, 'Electric vehicle charging: common questions')}${quoteForm(null, null, 'Get 3 prices for your electric vehicle')}</div>
+  <div class="narrow">${faqBlock(faqs, 'Electric vehicle charging: common questions')}${quoteForm(null, null)}</div>
 </section>`;
   write(p, layout({
     p, body, crumbs: [['Home', '/'], ['Electric vehicles', p]], schema: [faqLd(faqs)],
     title: 'Electric Vehicle Accessories and Home Charging in Sri Lanka',
     desc: `Accessory and home charging guides for electric vehicles in Sri Lanka, including ${list.slice(0, 3).map(v => v.full).join(', ')}.`
+  }));
+}
+
+function shopsIndex() {
+  const p = '/where-to-buy/';
+  const groups = accessories.map(a => [a, shopsFor(a)]).filter(g => g[1].length);
+  const body = `
+<section class="wrap page">
+  <h1>Where to buy vehicle accessories in Sri Lanka</h1>
+  <p class="lede">${shops.length} shops and fitters, grouped by what they sell or install. Every entry comes from the shop's own website.</p>
+  <ul class="chips">${groups.map(([a]) => `<li><a href="#${a.slug}">${esc(a.plural)}</a></li>`).join('')}</ul>
+  ${groups.map(([a, list]) => `<section id="${a.slug}"><h2>${esc(a.plural)}</h2><ul class="shops">${list.map(sh => shopCard(sh, a)).join('')}</ul><p><a class="more" href="${url(a.path)}">Read the ${esc(lower1(a.name))} guide</a></p></section>`).join('')}
+  <div class="narrow">${shopNote}<p>${listCta}</p></div>
+</section>`;
+  write(p, layout({
+    p, body, crumbs: [['Home', '/'], ['Where to buy', p]],
+    title: 'Where to Buy Vehicle Accessories in Sri Lanka: Shops and Fitters',
+    desc: `A free directory of ${shops.length} Sri Lankan shops and fitters for dashcams, window tint, ceramic coating, seat covers, GPS trackers, helmets and EV chargers.`,
+    schema: [{ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: shops.map((sh, i) => ({ '@type': 'ListItem', position: i + 1, name: sh.name, url: sh.url })) }]
   }));
 }
 
@@ -516,35 +558,37 @@ function staticPages() {
     p, title, desc, crumbs: [['Home', '/'], [name, p]], body: `<article class="wrap page prose">${html}</article>`, ...extra
   }));
 
-  simple('/how-it-works/', 'How VehicleGuide Works: Three Fitted Quotes on WhatsApp',
-    'How the free VehicleGuide quote service works: send your vehicle and area on WhatsApp and get three fitted prices from shops near you.', 'How it works', `
+  simple('/how-it-works/', 'How VehicleGuide Works',
+    'How VehicleGuide works: pick your vehicle, read what to check, and choose from shops and fitters that sell and install each accessory in Sri Lanka.', 'How it works', `
   <h1>How it works</h1>
-  <p class="lede">You read the guide, we do the ringing around. The service is free for vehicle owners.</p>
+  <p class="lede">VehicleGuide is a free guide. You read what to check, then choose a shop yourself.</p>
   <ol class="steps">
-    <li><strong>Send one message.</strong> Tell us your vehicle, what you need and your town. A photo of the vehicle helps for body and trim work.</li>
-    <li><strong>We collect prices.</strong> We contact accessory shops and fitters that handle your kind of vehicle and ask each for a fitted price.</li>
-    <li><strong>You get three quotes.</strong> Each one shows the product, the fitted price, the warranty and where the shop is. This usually takes less than a day.</li>
-    <li><strong>You choose.</strong> Book with the shop directly and pay them. Tell them VehicleGuide sent you.</li>
+    <li><strong>Pick your vehicle.</strong> Guides are written model by model, so the advice fits what you drive.</li>
+    <li><strong>Read what to check.</strong> Each guide covers what to look for, how long fitting takes and what moves the price.</li>
+    <li><strong>Choose where to buy.</strong> Each guide lists shops and fitters with their area and a link to their own site.</li>
+    <li><strong>Deal with the shop directly.</strong> Ask at least two for a fitted price and a written invoice.</li>
   </ol>
   <h2>What it costs</h2>
-  <p>Nothing for you. Shops in our network pay us a fee when a job comes through. We send you the prices exactly as the shops give them.</p>
+  <p>Nothing. The guides and listings are free to use, and shops are currently listed free and unpaid. If we introduce paid placements, they will be clearly labelled.</p>
+  <h2>How shops get listed</h2>
+  <p>We list a shop when its own website confirms that it sells or fits the accessory, and we record the date we checked. A listing is not a recommendation: we have not tested these shops, so confirm price, stock and warranty yourself.</p>
   <h2>What we do not do</h2>
-  <p>We do not sell, stock or fit anything, and we do not take payment from vehicle owners. Workmanship and warranty are between you and the shop you choose, so ask for a written invoice.</p>
+  <p>We do not sell, stock or fit anything, and we do not take payment from vehicle owners. Workmanship and warranty are between you and the shop you choose.</p>
   ${quoteForm(null, null)}`);
 
-  simple('/for-shops/', 'For Accessory Shops and Fitters: Get Customers from VehicleGuide',
-    'Accessory shops, tint studios, detailers and fitters in Sri Lanka: receive ready-to-buy customer requests from VehicleGuide. First month free.', 'For shops', `
-  <h1>Accessory shop or fitter? We send you customers.</h1>
-  <p class="lede">Vehicle owners search for accessories by model, read our guides and ask us for prices. We pass each request to shops that can do the job.</p>
-  <h2>How it works for you</h2>
-  <ol class="steps">
-    <li><strong>We send a request.</strong> Vehicle, accessory and the customer's area, on WhatsApp.</li>
-    <li><strong>You reply with a fitted price.</strong> Product, price, warranty and when you can do it.</li>
-    <li><strong>The customer chooses.</strong> If they pick you, they come to your shop and pay you directly.</li>
-  </ol>
+  simple('/for-shops/', 'For Accessory Shops and Fitters: Get Listed Free on VehicleGuide',
+    'Accessory shops, tint studios, detailers and fitters in Sri Lanka: get a free listing on VehicleGuide and reach vehicle owners searching by model.', 'For shops', `
+  <h1>Accessory shop or fitter? Get listed free.</h1>
+  <p class="lede">Vehicle owners search for accessories by model and land on our guides. Each guide shows where to buy. Your shop can be on that list.</p>
+  <h2>What you get</h2>
+  <ul>
+    <li>Your shop name, area and a link on every guide for the accessories you sell or fit</li>
+    <li>Visitors sent straight to your website or WhatsApp, already knowing what they want</li>
+    <li>Links tagged so you can see visits from vehicleguide.lk in your own analytics</li>
+  </ul>
   <h2>What it costs</h2>
-  <p>The first month is free while you see the quality of the requests. After that we agree a simple fee per completed job. There is no listing fee and no contract.</p>
-  <h2>Who we are looking for</h2>
+  <p>Nothing during our launch period. Later we plan to offer paid featured placements, clearly labelled. A basic listing will stay available.</p>
+  <h2>Who we list</h2>
   <ul>
     <li>Car accessory shops, audio and Android player fitters</li>
     <li>Tint studios and detailing or ceramic coating studios</li>
@@ -552,7 +596,8 @@ function staticPages() {
     <li>Motorbike and three-wheeler accessory shops</li>
     <li>Auto electricians, GPS tracker installers and EV charger electricians</li>
   </ul>
-  <p><a class="btn btn-go" data-wa href="${waLink('Hi VehicleGuide, I run an accessory shop and would like to receive customer requests. Shop name and town: ')}" rel="nofollow noopener">List my shop on WhatsApp</a></p>`);
+  <p>We need a website, Facebook page or Google listing that shows what you sell and where you are.</p>
+  <p><a class="btn btn-go" data-wa href="${waLink('Hi VehicleGuide, I run a shop and would like a free listing. Shop name, town and what we fit: ')}" rel="nofollow noopener">Get listed on WhatsApp</a></p>`);
 
   simple('/about/', 'About VehicleGuide and Our Sources',
     'Who is behind VehicleGuide, how the guides are written, and where the vehicle registration figures come from.', 'About', `
@@ -564,18 +609,18 @@ function staticPages() {
   <h2>Where the figures come from</h2>
   <p>Popularity notes use monthly vehicle registration analysis by JB Securities, as reported by Daily FT, Daily Mirror, Hiru News and Outlook Business during 2026. The source is shown beside each figure.</p>
   <h2>Independence</h2>
-  <p>We are not affiliated with any vehicle manufacturer, agent or importer. Shops in our network pay a fee when a job comes through. Guides are written before, and separately from, any commercial arrangement.</p>
+  <p>We are not affiliated with any vehicle manufacturer, agent or importer. Shop listings are currently free and unpaid. If we introduce paid placements, they will be clearly labelled, and guides will stay separate from any commercial arrangement.</p>
   <h2>Corrections</h2>
   <p>If something here is wrong or out of date, tell us and we will fix it. <a data-wa href="${waLink('Hi VehicleGuide, I have a correction: ')}" rel="nofollow noopener">Message us on WhatsApp</a>.</p>`);
 
   simple('/privacy/', 'Privacy: How VehicleGuide Uses Your Details',
-    'What VehicleGuide collects when you ask for quotes, how it is used and how to have it removed.', 'Privacy', `
+    'What VehicleGuide collects when you message us, how it is used and how to have it removed.', 'Privacy', `
   <h1>Privacy</h1>
-  <p class="lede">We collect as little as we need to get you quotes.</p>
+  <p class="lede">We collect as little as we need to help you.</p>
   <h2>What we collect</h2>
-  <p>When you ask for quotes, you send us a WhatsApp message with your vehicle, what you need and your area. We see your WhatsApp number and name as with any chat.</p>
+  <p>When you ask us for help, you send us a WhatsApp message with your vehicle, what you need and your area. We see your WhatsApp number and name as with any chat.</p>
   <h2>How we use it</h2>
-  <p>We pass your vehicle, the accessory and your area to shops so they can price the job. We share your phone number with a shop only when you tell us which quote you want to take.</p>
+  <p>We use your message to suggest a shop. We do not pass your phone number to any shop unless you ask us to. Links to shops carry a tag that tells the shop the visit came from VehicleGuide; it contains nothing about you.</p>
   <h2>Analytics</h2>
   <p>We may use basic website analytics to count page visits. This does not identify you personally.</p>
   <h2>Removing your details</h2>
@@ -599,6 +644,7 @@ fs.writeFileSync(path.join(OUT, '.nojekyll'), '');
 homePage();
 vehiclesIndex();
 accessoriesIndex();
+shopsIndex();
 evPage();
 TYPES.forEach(typePage);
 accessories.forEach(accessoryPage);
@@ -610,10 +656,12 @@ fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
 fs.writeFileSync(path.join(OUT, 'robots.txt'),
   `User-agent: *\nAllow: /\n\n# AI answer engines are welcome to read and cite these guides\n${['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended', 'Bingbot'].map(b => `User-agent: ${b}\nAllow: /\n`).join('\n')}\nSitemap: ${abs('/sitemap.xml')}\n`);
 fs.writeFileSync(path.join(OUT, 'llms.txt'),
-  `# ${cfg.name}\n\n> ${cfg.tagline}. Independent, model-by-model accessory guides for Sri Lanka, with a free service that collects three fitted quotes from local shops on WhatsApp. Reviewed ${cfg.updatedLabel}.\n\n## Accessory guides\n${accessories.map(a => `- [${a.plural}](${abs(a.path)}): ${a.summary}`).join('\n')}\n\n## Vehicles\n${vehicles.map(v => `- [${v.full}](${abs(v.path)}): ${v.body}, ${lower1(v.power)}. ${v.note}`).join('\n')}\n\n## About\n- [How it works](${abs('/how-it-works/')})\n- [About and sources](${abs('/about/')})\n- [For accessory shops](${abs('/for-shops/')})\n`);
+  `# ${cfg.name}\n\n> ${cfg.tagline}. Independent, model-by-model accessory guides for Sri Lanka, with free listings of shops and fitters that sell and install each accessory. Reviewed ${cfg.updatedLabel}.\n\n## Accessory guides\n${accessories.map(a => `- [${a.plural}](${abs(a.path)}): ${a.summary}`).join('\n')}\n\n## Vehicles\n${vehicles.map(v => `- [${v.full}](${abs(v.path)}): ${v.body}, ${lower1(v.power)}. ${v.note}`).join('\n')}\n\n## Where to buy\n${shops.map(sh => `- ${sh.name} (${sh.area}): ${sh.about} ${sh.url}`).join('\n')}\n\n## About\n- [Where to buy](${abs('/where-to-buy/')})\n- [How it works](${abs('/how-it-works/')})\n- [About and sources](${abs('/about/')})\n- [For accessory shops](${abs('/for-shops/')})\n`);
 
 const money = vehicles.reduce((n, v) => n + v.acc.length, 0);
+const noShop = accessories.filter(a => !shopsFor(a).length).map(a => a.slug);
+if (noShop.length) console.warn(`NOTE: no shops listed yet for: ${noShop.join(', ')}.`);
 console.log(`Built ${pages.length} pages: ${vehicles.length} vehicles, ${accessories.length} accessories, ${money} vehicle x accessory pages.`);
 if (!cfg.whatsapp) console.warn('WARNING: site.config.json has no "whatsapp" number. Quote buttons open WhatsApp without a recipient until you set it (format: 9477XXXXXXX).');
 const unpriced = accessories.filter(a => !priceText(a)).length;
-if (unpriced) console.warn(`NOTE: ${unpriced} of ${accessories.length} accessories have no price range yet. Pages show "Quoted on request" until priceMin/priceMax are filled in data/accessories.json.`);
+if (unpriced) console.warn(`NOTE: ${unpriced} of ${accessories.length} accessories have no price range yet. Pages show no price until priceMin/priceMax are filled in data/accessories.json.`);

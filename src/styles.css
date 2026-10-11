@@ -142,9 +142,23 @@ select:disabled{border-color:var(--line);color:var(--muted);background:var(--ker
 .links li{margin:0}
 .links a{display:block;padding:.3rem 0}
 
+/* shop listings */
+.shops{list-style:none;padding:0;margin:0 0 1rem;display:grid;gap:.6rem}
+.shop{margin:0;display:flex;gap:1rem;align-items:center;justify-content:space-between;background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--ink);border-radius:var(--r);padding:.85rem 1rem}
+.shop strong{font:600 1.25rem/1.2 var(--display);margin-right:.6rem}
+.shop-area{font-size:.9rem;color:var(--muted)}
+.shop p{margin:.25rem 0 0;font-size:.95rem;max-width:60ch}
+.shop .btn{flex:none;white-space:nowrap}
+.box-buy{border:3px solid var(--ink);border-radius:10px}
+.box-buy .links li{padding:.35rem 0;border-bottom:1px solid var(--line)}
+.box-buy .links a{display:inline;padding:0;font-weight:600}
+.box-buy .links span{display:block;font-size:.875rem;color:var(--muted)}
+.box-buy .fine{margin:.6rem 0 0}
+.empty p{margin:0 0 .4rem}
+
 /* quote form */
-.quote{background:var(--paper);border:3px solid var(--ink);border-radius:10px;padding:1.1rem 1.1rem 1rem;display:grid;gap:.75rem}
-.quote h2{font-size:1.45rem;margin:0}
+.quote{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:1.1rem 1.1rem 1rem;display:grid;gap:.75rem}
+.quote h2{font-size:1.2rem;margin:0}
 .quote p{margin:0;font-size:.95rem}
 .quote .btn{width:100%}
 .prose .quote,.narrow .quote{margin-top:2rem;max-width:480px}
@@ -182,6 +196,7 @@ select:disabled{border-color:var(--line);color:var(--muted);background:var(--ker
   .picker{box-shadow:4px 4px 0 var(--ink)}
   .facts th{width:8rem}
   .row-meta{display:none}
+  .shop{flex-direction:column;align-items:flex-start}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media print{.top,.foot,.side,.quote{display:none}}

@@ -14,6 +14,7 @@ Pushing to `main` builds and deploys through GitHub Actions (Settings > Pages > 
 |---|---|
 | `site.config.json` | WhatsApp number (`9477XXXXXXX`, no plus sign), GA4 ID, optional lead-logging endpoint, review date |
 | `data/vehicles.json` | One line per vehicle. Adding a line creates its hub page and every accessory page that fits it |
+| `data/shops.json` | One line per shop: name, area, link, what it sells (`sells`), optional vehicle tags (`only`), date checked |
 | `data/accessories.json` | One block per accessory: guide text, checks, FAQs, `priceMin` / `priceMax` in rupees |
 | `src/styles.css`, `src/app.js` | Design and front-end behaviour |
 
@@ -39,6 +40,10 @@ Pages show "Quoted on request" until an accessory has both `priceMin` and `price
 - How it works, For shops, About, Privacy, 404
 - `sitemap.xml`, `robots.txt` (AI crawlers allowed), `llms.txt`
 - JSON-LD on every page: WebPage, BreadcrumbList, FAQPage; Organization and WebSite on the home page
+
+## Where to buy
+
+Each guide lists the shops in `data/shops.json` whose `sells` includes that accessory. Add a shop only when its own website confirms what it sells and where it is. Outbound links carry `utm_source=vehicleguide.lk` so shops can see the traffic, and each click fires a `shop_click` event when `ga4` is set.
 
 ## Leads
 
